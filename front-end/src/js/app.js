@@ -1,3 +1,5 @@
+// import {saveAs} from 'file-saver';
+
 const overlay = $("#overlay");
 const btnUpload = $("#btn-upload");
 const dropZoneElm = $("#drop-zone");
@@ -29,6 +31,22 @@ dropZoneElm.on('drop', (evt)=> {
 });
 overlay.on('dragover', (evt) => evt.preventDefault());
 overlay.on('drop', (evt) => evt.preventDefault());
+mainElm.on('click', '.image .download', (eventData) => {
+    eventData.stopPropagation();
+
+    const imgDiv = $(eventData.target).closest('.image');
+    const imagePath = imgDiv.css('background-image').replace(/^url\(['"](.+)['"]\)/, '$1');
+    const fileName = getFileName(imagePath);
+
+    downloadImage(imagePath, fileName);
+});
+function getFileName(imagePath){
+    return imagePath.substring(imagePath.lastIndexOf("/") + 1);
+}
+function downloadImage(imagePath, fileName) {
+    let fileSaver = require('file-saver');
+    fileSaver.saveAs(imagePath, fileName);
+}
 
 function loadAllImages(){
     const jqxhr = $.ajax(`${REST_API_URL}/images`);
