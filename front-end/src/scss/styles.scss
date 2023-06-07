@@ -107,7 +107,7 @@ main > .image {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid lightgrey;
+  border: 1px solid lightgray;
 
   .lds-facebook {
     display: inline-block;
@@ -120,7 +120,7 @@ main > .image {
     position: absolute;
     left: 8px;
     width: 16px;
-    background: #fff;
+    background: dodgerblue;
     animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
   }
   .lds-facebook div:nth-child(1) {
