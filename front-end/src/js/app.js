@@ -1,4 +1,4 @@
-// import {saveAs} from 'file-saver';
+import {saveAs} from 'file-saver';
 
 const overlay = $("#overlay");
 const btnUpload = $("#btn-upload");
@@ -6,8 +6,6 @@ const dropZoneElm = $("#drop-zone");
 const mainElm = $("main");
 const REST_API_URL = `http://localhost:8080/gallery`;
 const cssLoaderHtml = '<div class="lds-facebook"><div></div><div></div><div></div></div>';
-const btnDownload = $("#download")
-const imgOverlay = $("#img-overlay");
 const imgPreviewElm = $("#preview-image");
 const popupWindowElm = $(".popup-image");
 const btnClose = $("#btn-close");
@@ -59,7 +57,6 @@ mainElm.on('click', ".image #download:not(.download)", (eventData)=>{
 
     const selectedImgIndex = imgUrlList.findIndex((value) => value === imageUrl);
     showPopupImage(selectedImgIndex);
-    console.log(selectedImgIndex);
 });
 btnNext.on('click', ()=>{
     const nextIndex = currentImgIndex + 1;
@@ -82,8 +79,8 @@ function getFileName(imagePath){
     return imagePath.substring(imagePath.lastIndexOf("/") + 1);
 }
 function downloadImage(imagePath, fileName) {
-    let fileSaver = require('file-saver');
-    fileSaver.saveAs(imagePath, fileName);
+    // let fileSaver = require('file-saver');
+    saveAs(imagePath, fileName);
 }
 
 function loadAllImages(){
@@ -105,10 +102,8 @@ function loadAllImages(){
             mainElm.append(imgDiv);
             imgUrlList.push(imageUrl);
         });
-
     });
     jqxhr.fail(()=>{});
-    console.log(imgUrlList);
 }
 function uploadImages(imageFiles){
     const formData = new FormData();
